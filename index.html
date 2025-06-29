@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Everest Legal Associates| Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #dynamic-bg {
+            transition: background-image 1s ease-in-out;
+        }
+    </style>
+
+</head>
+
+<body class="flex flex-col min-h-screen text-white relative">
+
+    <!-- Background image overlay -->
+    <div id="dynamic-bg" class="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat transition-all duration-700">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    </div>
+
+    <script>
+        const imageList = [
+            "Assets/bg3.jpg",
+            "Assets/bg.jpg",
+            "Assets/bg2.jpg",
+            "Assets/bg4.jpg"
+        ];
+
+        function updateBackground() {
+            const second = new Date().getSeconds();
+            const index = second % imageList.length;
+            const image = imageList[index];
+            const bgDiv = document.getElementById("dynamic-bg");
+
+            if (!bgDiv.style.backgroundImage.includes(image)) {
+                bgDiv.style.backgroundImage = `url('${image}')`;
+            }
+        }
+
+        // Initial run
+        updateBackground();
+
+        // Update every second
+        setInterval(updateBackground, 5000);
+    </script>
+
+
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 w-full z-20 bg-black/50 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 text-white">
+                <svg class="h-8 w-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2L2 7h20L12 2zm0 2.5l6.5 3.2v3.3L12 8.5 5.5 11V7.7L12 4.5zM5 13v6h4v-4h6v4h4v-6l-7-3-7 3z" />
+                </svg>
+                <span class="text-2xl font-bold tracking-wide">Everest Legal Associates</span>
+            </a>
+
+            <!-- Hamburger Button -->
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+
+            <!-- Desktop Menu -->
+            <nav id="navbar-default" class="hidden md:flex md:items-center md:space-x-10 text-white font-medium">
+                <a href="index.html" class="hover:text-blue-400 text-blue-400 font-semibold transition">Home</a>
+                <a href="about.html" class="hover:text-blue-400 transition">About</a>
+
+                <!-- Services Dropdown -->
+                <div class="relative">
+                    <button id="services-toggle"
+                        class="flex items-center hover:text-blue-400 transition focus:outline-none">
+                        Services
+                        <svg class="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.937a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="services-dropdown"
+                        class="absolute left-0 mt-2 w-44 bg-gray-800 text-white rounded shadow-lg hidden z-30 border border-gray-700">
+                        <a href="CorporateService.html"
+                            class="block px-4 py-2 hover:bg-gray-700 hover:text-blue-400 transition">Corporate Law</a>
+                        <a href="FamilyService.html"
+                            class="block px-4 py-2 hover:bg-gray-700 hover:text-blue-400 transition">Family Law</a>
+                        <a href="criminalService.html"
+                            class="block px-4 py-2 hover:bg-gray-700 hover:text-blue-400 transition">Criminal Law</a>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="hover:text-blue-400 transition">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-6 pb-4 text-sm text-white bg-black/90">
+            <a href="index.html" class="block py-2 hover:text-blue-400 text-blue-400">Home</a>
+            <a href="about.html" class="block py-2 hover:text-blue-400">About</a>
+
+            <!-- Clickable Services for Mobile -->
+            <div>
+                <button id="mobile-services-toggle"
+                    class="w-full text-left py-2 font-semibold hover:text-blue-400">Services</button>
+                <div id="mobile-services-dropdown" class="pl-4 hidden text-white">
+                    <a href="CorporateService.html"
+                        class="block py-2 hover:text-blue-400 hover:bg-gray-800 rounded">Corporate
+                        Law</a>
+                    <a href="FamilyService.html" class="block py-2 hover:text-blue-400 hover:bg-gray-800 rounded">Family
+                        Law</a>
+                    <a href="CriminalService.html"
+                        class="block py-2 hover:text-blue-400 hover:bg-gray-800 rounded">Criminal
+                        Law</a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="block py-2 hover:text-blue-400">Contact</a>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+            document.getElementById('menu-toggle').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            document.getElementById('services-toggle').addEventListener('click', () => {
+                document.getElementById('services-dropdown').classList.toggle('hidden');
+            });
+
+            document.getElementById('mobile-services-toggle').addEventListener('click', () => {
+                document.getElementById('mobile-services-dropdown').classList.toggle('hidden');
+            });
+        </script>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-10 flex items-center justify-center text-center px-4 min-h-screen">
+        <div class="max-w-2xl">
+            <h1 class="text-5xl sm:text-6xl font-extrabold leading-tight">
+                We build relationships that inspire success
+            </h1>
+            <p class="mt-6 text-lg text-gray-300">
+                Your trusted partner in legal matters.
+            </p>
+            <div class="mt-8 flex justify-center">
+                <div id="swipe-button-wrapper"
+                    class="relative w-full max-w-sm h-14 bg-white/10 rounded-full overflow-hidden">
+                    <button id="swipe-button"
+                        class="absolute left-0 top-0 bottom-0 px-6 flex items-center justify-center rounded-full bg-green-500 text-white font-semibold shadow transition-all duration-300"
+                        style="height: 100%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" />
+                        </svg>
+                        Learn More About us
+                    </button>
+                </div>
+
+                <script>
+                    const button = document.getElementById("swipe-button");
+                    const wrapper = document.getElementById("swipe-button-wrapper");
+
+                    let isDragging = false;
+                    let startX = 0;
+                    let currentX = 0;
+                    let wrapperWidth = 0;
+                    let maxTranslate = 0;
+
+                    function onMove(x) {
+                        const offset = Math.min(Math.max(0, x - startX), maxTranslate);
+                        button.style.transform = `translateX(${offset}px)`;
+                        currentX = offset;
+                    }
+
+                    function resetPosition() {
+                        button.style.transition = "transform 0.4s ease";
+                        button.style.transform = "translateX(0)";
+                        setTimeout(() => {
+                            button.style.transition = "";
+                        }, 400);
+                    }
+
+                    function handleEnd() {
+                        isDragging = false;
+                        if (currentX > maxTranslate * 0.8) {
+                            button.style.transform = `translateX(${maxTranslate}px)`;
+                            window.location.href = "about.html";
+                        } else {
+                            resetPosition();
+                        }
+                    }
+
+                    function setDimensions() {
+                        wrapperWidth = wrapper.offsetWidth;
+                        maxTranslate = wrapperWidth - button.offsetWidth;
+                    }
+
+                    window.addEventListener("resize", setDimensions);
+                    setTimeout(setDimensions, 300); // Delay to ensure layout is ready
+
+                    // Mouse events
+                    button.addEventListener("mousedown", (e) => {
+                        isDragging = true;
+                        startX = e.clientX - currentX;
+                        setDimensions();
+                    });
+
+                    window.addEventListener("mousemove", (e) => {
+                        if (!isDragging) return;
+                        onMove(e.clientX);
+                    });
+
+                    window.addEventListener("mouseup", handleEnd);
+
+                    // Touch events
+                    button.addEventListener("touchstart", (e) => {
+                        isDragging = true;
+                        startX = e.touches[0].clientX - currentX;
+                        setDimensions();
+                    }, { passive: true });
+
+                    window.addEventListener("touchmove", (e) => {
+                        if (!isDragging) return;
+                        onMove(e.touches[0].clientX);
+                    }, { passive: true });
+
+                    window.addEventListener("touchend", handleEnd);
+                </script>
+
+
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Everest Legal Associates</h2>
+                <p class="text-gray-400">We provide reliable and strategic legal solutions tailored to your unique
+                    needs. Your justice is our commitment.</p>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Navigation</h2>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="about.html" class="hover:text-white">About Us</a></li>
+                    <li><a href="CorporateService.html" class="hover:text-white">Coroprate Services</a></li>
+                    <li><a href="FamilyService.html" class="hover:text-white">Family Services</a></li>
+                    <li><a href="CriminalService.html" class="hover:text-white">Criminal Law Services</a></li>
+                    <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Contact Us</h2>
+                <p class="text-gray-400">Email:
+                    <a href="mailto:everestlegal123@gmail.com" class="hover:text-white">everestlegal123@gmail.com</a>
+                </p>
+                <p class="text-gray-400">Phone: +977 9849844661, +977 9818401190</p>
+                <div class="mt-4 space-x-4">
+                    <a href="PrivacyPolicy.html" class="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
+                    <a href="Trems&Condition.html" class="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+            &copy; 2025 Everest Legal Associates. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
